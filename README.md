@@ -1,97 +1,95 @@
-# 📄 CSV Translator with Google Gemini API
+# 📄 CSV Translator with Google Gemini API (Command-Line Ready)
 
-Translate selected columns in a CSV file to any target language using the Google Gemini API via Python SDK.  
-This tool is optimized for use in Google Colab, offering a simple and interactive environment.
+This tool allows you to **translate selected columns in a CSV file** using the **Google Gemini API** via Python.  
+It supports **batch translation**, **row filtering**, and is fully runnable via **command-line in Google Colab or local environments**.
 
 ---
 
 ## 🚀 Features
 
-- Upload your CSV file directly in Colab
-- Select specific columns to translate
-- Choose your target language (e.g., "fr" for French, "zh" for Chinese)
-- Automatically translates using Gemini (Google's generative AI model)
-- Download the translated CSV for further use
-
----
-
-## 🛠️ Requirements
-
-- Python 3.8+
-- Google Colab (preferred environment)
-- Google Generative AI SDK (`google-generativeai`)
-- `pandas`
+- 🔍 Translate only specific columns (e.g. "title", "description")
+- 🌍 Choose any target language (e.g. `"fr"` for French, `"zh"` for Chinese)
+- 📊 Translate selected rows (row range) in batches
+- ✅ Uses Gemini (`gemini-pro`) via `google-generativeai` SDK
+- 💻 Command-line interface ready (e.g., run `main.py` with flags)
 
 ---
 
 ## 📦 Installation
 
-Inside your Colab notebook, install the required packages:
+In Colab or your Python environment:
 
-```python
-!pip install -q google-generativeai pandas
+```bash
+pip install google-generativeai pandas
 ````
 
 ---
 
-## 🔐 API Key Setup
-
-To use the Gemini API, you must configure your API key:
-
-```python
-import google.generativeai as genai
-genai.configure(api_key="YOUR_API_KEY")
-```
-
-Get your API key from: [https://makersuite.google.com/app/apikey](https://makersuite.google.com/app/apikey)
-
----
-
-## 📝 Usage Instructions
-
-1. Clone or upload the files to your Colab environment.
-2. Run `main.ipynb`.
-3. Upload your CSV file when prompted.
-4. Specify:
-
-   * Columns you want to translate
-   * Target language (ISO language code)
-5. Enter your Gemini API key.
-6. Download the translated CSV.
-
----
-
-## 📁 Repository Structure
+## 📁 Project Structure
 
 ```
 csv-translator-gemini/
-├── README.md
-├── requirements.txt
+├── main.py               # Main script to run from CLI
 ├── translator.py         # Translation logic using Gemini
-├── main.ipynb            # Google Colab notebook interface
+├── requirements.txt
+└── README.md
 ```
+
+---
+
+## 🔧 Usage (Command-Line in Colab or Terminal)
+
+```bash
+python3 main.py \
+  --api_key="YOUR_GEMINI_API_KEY" \
+  --input="sample.csv" \
+  --output="translated_sample.csv" \
+  --columns="title,description" \
+  --language="fr" \
+  --row_start=0 \
+  --row_end=50 \
+  --batch_size=10
+```
+
+### 🔑 Arguments
+
+| Flag           | Description                                     |
+| -------------- | ----------------------------------------------- |
+| `--api_key`    | Your Gemini API key                             |
+| `--input`      | Path to input CSV file                          |
+| `--output`     | Path to save the translated CSV                 |
+| `--columns`    | Comma-separated list of columns to translate    |
+| `--language`   | Target language code (e.g. `es`, `zh`, `fr`)    |
+| `--row_start`  | (Optional) Start row index (default: 0)         |
+| `--row_end`    | (Optional) End row index (default: full length) |
+| `--batch_size` | (Optional) Number of rows to translate at once  |
+
+---
+
+## 🧠 Gemini Prompt Design
+
+This tool uses a carefully constructed prompt to Gemini for accurate batch translation.
+It ensures outputs are clean, ordered, and aligned with input rows using bullet formatting.
 
 ---
 
 ## ⚠️ Disclaimer
 
-This project uses the **Google Gemini API** to process and translate text content from CSV files.
-Please note:
+This project is for **educational and research use only**.
 
-* This tool is for **educational and research purposes only**.
-* You are solely responsible for complying with **Google's API Terms of Service** and any applicable data privacy laws when using this tool.
-* Avoid uploading sensitive or personally identifiable information (PII) unless you are sure of compliance and data handling responsibilities.
-* The translation output may not always be accurate; always review results before use in production settings.
+* You are responsible for complying with **Google's API terms** and **data protection laws**.
+* Do **not upload sensitive or personal data** unless fully anonymized and authorized.
+* Translation quality may vary; always review outputs before use in production workflows.
 
 ---
 
-## 📬 Contact
-
-Feel free to open an issue or pull request if you’d like to contribute or report problems.
-
----
-
-## 📝 License
+## 📄 License
 
 MIT License
+
+---
+
+## 🙋 Need Help?
+
+Open an issue or contact the project maintainer for support.
 
